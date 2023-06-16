@@ -7,7 +7,9 @@ import com.post.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostService {
@@ -51,7 +53,7 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    public String deletePost(Long id, PostRequestDto requestDto) {
+    public Map<String, Object> deletePost(Long id, PostRequestDto requestDto) {
         Post post = findPostById(id);
 
         // 비밀번호 일치 여부 확인
@@ -61,7 +63,10 @@ public class PostService {
         // 게시글 삭제
         postRepository.delete(post);
 
-        return "\"success\":";
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+
+        return response;
     }
 
     private Post findPostById(Long id) {

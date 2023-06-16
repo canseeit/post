@@ -6,6 +6,7 @@ import com.post.post.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -38,7 +39,7 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")
-    public String deletePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
+    public Map<String, Object> deletePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
         return postService.deletePost(id, requestDto);
     }
 }
