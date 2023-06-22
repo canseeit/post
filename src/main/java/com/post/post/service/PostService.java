@@ -53,7 +53,8 @@ public class PostService {
         return new PostResponseDto(post);
     }
 
-    public Map<String, Object> deletePost(Long id, PostRequestDto requestDto) {
+    @Transactional
+    public Map<String, Boolean> deletePost(Long id, PostRequestDto requestDto) {
         Post post = findPostById(id);
 
         // 비밀번호 일치 여부 확인
@@ -63,7 +64,7 @@ public class PostService {
         // 게시글 삭제
         postRepository.delete(post);
 
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Boolean> response = new HashMap<>();
         response.put("success", true);
 
         return response;
